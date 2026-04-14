@@ -1,0 +1,1 @@
+export { HistoryModule } from './HistoryModule';

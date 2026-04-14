@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链上套利助手 - 测试页</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, sans-serif; background: #111827; color: #f3f4f6; padding: 20px; }
+        .card { background: #1f2937; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        h1 { color: #60a5fa; margin-bottom: 20px; }
+        h2 { color: #9ca3af; font-size: 14px; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #374151; }
+        th { color: #9ca3af; font-size: 12px; }
+        .green { color: #34d399; }
+        .blue { color: #60a5fa; }
+        .purple { color: #a78bfa; }
+        .btn { background: #3b82f6; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+        .btn:hover { background: #2563eb; }
+        .btn-green { background: #10b981; }
+        .btn-green:hover { background: #059669; }
+        #status { padding: 10px; border-radius: 8px; margin-bottom: 20px; }
+        .ok { background: #064e3b; color: #34d399; }
+        .err { background: #7f1d1d; color: #fca5a5; }
+    </style>
+</head>
+<body>
+    <h1>🥥 链上套利助手</h1>
+    
+    <div id="status" class="card">正在连接...</div>
+    
+    <div class="card">
+        <button class="btn" onclick="scan()">🔄 扫描机会</button>
+        <button class="btn btn-green" onclick="startMonitor()">▶ 启动监控</button>
+        <button class="btn" onclick="stopMonitor()" style="background:#ef4444">⏹ 停止</button>
+    </div>
+
+    <div class="card">
+        <h2>套利机会 (<span id="oppCount">0</span>)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>代币</th>
+                    <th>路径</th>
+                    <th>收益率</th>
+                    <th>净利润</th>
+                    <th>风险</th>
+                </tr>
+            </thead>
+            <tbody id="oppTable">
+                <tr><td colspan="5">加载中...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    const API = 'http://localhost:8500';
+
+    async function load() {
+        const status = document.getElementById('status');
+        try {
+            // 测试连接
+            const r = await fetch(API + '/');
+            const d = await r.json();
+            status.className = 'card ok';
+            status.innerHTML = '✅ 后端已连接: ' + d.name + ' v' + d.version;
+            
+            // 加载机会
+            const opp = await fetch(API + '/api/opportunities');
+            const oppData = await opp.json();
+            const opportunities = oppData.data?.opportunities || [];
+            document.getElementById('oppCount').textContent = opportunities.length;
+            
+            const tbody = document.getElementById('oppTable');
+            if (opportunities.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">暂无机会，点击扫描</td></tr>';
+            } else {
+                tbody.innerHTML = opportunities.slice(0, 20).map(o => `
+                    <tr>
+                        <td><b>${o.symbol}</b></td>
+                        <td><span class="blue">${o.source_chain}</span> → <span class="purple">${o.target_chain}</span></td>
+                        <td class="green"><b>${(o.net_profit_pct || 0).toFixed(2)}%</b></td>
+                        <td>$${(o.net_profit_usd || 0).toFixed(2)}</td>
+                        <td>${o.risk_level || 'low'}</td>
+                    </tr>
+                `).join('');
+            }
+        } catch (e) {
+            status.className = 'card err';
+            status.innerHTML = '❌ 连接失败: ' + e.message + ' <button class="btn" onclick="load()">重试</button>';
+        }
+    }
+
+    async function scan() {
+        try {
+            await fetch(API + '/api/opportunities/scan', { method: 'POST' });
+            setTimeout(load, 2000);
+        } catch (e) {
+            alert('扫描失败: ' + e.message);
+        }
+    }
+
+    async function startMonitor() {
+        await fetch(API + '/api/monitor/start', { method: 'POST' });
+        alert('监控已启动');
+    }
+
+    async function stopMonitor() {
+        await fetch(API + '/api/monitor/stop', { method: 'POST' });
+        alert('监控已停止');
+    }
+
+    load();
+    setInterval(load, 30000);
+    </script>
+</body>
+</html>

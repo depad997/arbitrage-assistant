@@ -1,0 +1,205 @@
+2026-04-13 19:41:03,809 | WARNING  | arbitrage-assistant | <module>:265 | Phase 3 routes not available: cannot import name 'ExecutionPriority' from 'services.execution_engine' (/app/data/所有对话/主对话/链上套利助手/backend/services/execution_engine.py)
+2026-04-13 19:41:03,962 | ERROR    | arbitrage-assistant | get_chain_prices:1008 | Get chain prices error: 'NoneType' object has no attribute 'get_prices_by_chain'
+2026-04-13 19:45:12,980 | INFO     | arbitrage-assistant | <module>:263 | Phase 3 Automation routes loaded
+2026-04-13 19:45:13,067 | ERROR    | arbitrage-assistant | get_chain_prices:1008 | Get chain prices error: 'NoneType' object has no attribute 'get_prices_by_chain'
+2026-04-13 19:51:44,804 | INFO     | arbitrage-assistant | <module>:263 | Phase 3 Automation routes loaded
+2026-04-13 19:51:44,828 | INFO     | arbitrage-assistant | lifespan:132 | Starting 链上套利助手 v0.2.0
+2026-04-13 19:51:44,828 | INFO     | arbitrage-assistant | lifespan:146 | PriceMonitorService initialized
+2026-04-13 19:51:44,829 | INFO     | arbitrage-assistant | lifespan:150 | AlertService initialized
+2026-04-13 19:52:30,159 | INFO     | arbitrage-assistant | lifespan:154 | BridgeFeeMonitorService initialized
+2026-04-13 19:52:30,159 | INFO     | arbitrage-assistant | lifespan:168 | OpportunityDetectorService initialized
+2026-04-13 19:52:30,159 | INFO     | arbitrage-assistant | lifespan:174 | Application startup complete
+2026-04-13 19:52:30,424 | INFO     | arbitrage-assistant | lifespan:181 | StrategyManager initialized
+2026-04-13 19:52:30,630 | INFO     | arbitrage-assistant | lifespan:186 | FundManager initialized
+2026-04-13 19:52:30,840 | WARNING  | arbitrage-assistant | lifespan:209 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-13 19:52:30,845 | INFO     | arbitrage-assistant | lifespan:215 | Shutting down...
+2026-04-13 19:52:58,472 | INFO     | arbitrage-assistant | <module>:263 | Phase 3 Automation routes loaded
+2026-04-13 19:52:58,504 | INFO     | arbitrage-assistant | lifespan:132 | Starting 链上套利助手 v0.2.0
+2026-04-13 19:52:58,504 | INFO     | arbitrage-assistant | lifespan:146 | PriceMonitorService initialized
+2026-04-13 19:52:58,504 | INFO     | arbitrage-assistant | lifespan:150 | AlertService initialized
+2026-04-13 19:53:41,439 | INFO     | arbitrage-assistant | lifespan:154 | BridgeFeeMonitorService initialized
+2026-04-13 19:53:41,439 | INFO     | arbitrage-assistant | lifespan:168 | OpportunityDetectorService initialized
+2026-04-13 19:53:41,439 | INFO     | arbitrage-assistant | lifespan:174 | Application startup complete
+2026-04-13 19:53:41,480 | INFO     | arbitrage-assistant | lifespan:181 | StrategyManager initialized
+2026-04-13 19:53:41,516 | INFO     | arbitrage-assistant | lifespan:186 | FundManager initialized
+2026-04-13 19:53:41,545 | WARNING  | arbitrage-assistant | lifespan:209 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-13 19:53:41,548 | INFO     | arbitrage-assistant | lifespan:215 | Shutting down...
+2026-04-13 19:55:58,279 | INFO     | arbitrage-assistant | <module>:263 | Phase 3 Automation routes loaded
+2026-04-13 19:55:58,307 | INFO     | arbitrage-assistant | lifespan:132 | Starting 链上套利助手 v0.2.0
+2026-04-13 19:55:58,307 | INFO     | arbitrage-assistant | lifespan:146 | PriceMonitorService initialized
+2026-04-13 19:55:58,307 | INFO     | arbitrage-assistant | lifespan:150 | AlertService initialized
+2026-04-13 19:57:26,112 | INFO     | arbitrage-assistant | lifespan:154 | BridgeFeeMonitorService initialized
+2026-04-13 19:57:26,113 | INFO     | arbitrage-assistant | lifespan:168 | OpportunityDetectorService initialized
+2026-04-13 19:57:26,113 | INFO     | arbitrage-assistant | lifespan:174 | Application startup complete
+2026-04-13 19:57:26,149 | INFO     | arbitrage-assistant | lifespan:181 | StrategyManager initialized
+2026-04-13 19:57:26,179 | INFO     | arbitrage-assistant | lifespan:186 | FundManager initialized
+2026-04-13 19:57:26,204 | WARNING  | arbitrage-assistant | lifespan:209 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-13 19:57:26,207 | INFO     | arbitrage-assistant | lifespan:215 | Shutting down...
+2026-04-14 07:48:58,208 | INFO     | arbitrage-assistant | lifespan:215 | Shutting down...
+t available: No module named 'web3'
+2026-04-13 22:57:43,323 | INFO     | arbitrage-assistant | lifespan:132 | Starting 链上套利助手 v1.0.0
+2026-04-13 22:57:43,323 | INFO     | arbitrage-assistant | lifespan:146 | PriceMonitorService initialized
+2026-04-13 22:57:43,324 | INFO     | arbitrage-assistant | lifespan:150 | AlertService initialized
+2026-04-13 22:57:43,324 | INFO     | arbitrage-assistant | lifespan:154 | BridgeFeeMonitorService initialized
+2026-04-13 22:57:43,325 | INFO     | arbitrage-assistant | lifespan:168 | OpportunityDetectorService initialized
+2026-04-13 22:57:43,325 | INFO     | arbitrage-assistant | lifespan:174 | Application startup complete
+2026-04-13 22:57:43,373 | INFO     | arbitrage-assistant | lifespan:181 | StrategyManager initialized
+2026-04-13 22:57:43,416 | INFO     | arbitrage-assistant | lifespan:186 | FundManager initialized
+2026-04-13 22:57:43,468 | WARNING  | arbitrage-assistant | lifespan:209 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 07:49:01,027 | WARNING  | arbitrage-assistant | <module>:265 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 07:49:01,064 | INFO     | arbitrage-assistant | lifespan:132 | Starting 链上套利助手 v1.0.0
+2026-04-14 07:49:01,064 | INFO     | arbitrage-assistant | lifespan:146 | PriceMonitorService initialized
+2026-04-14 07:49:01,064 | INFO     | arbitrage-assistant | lifespan:150 | AlertService initialized
+2026-04-14 07:49:01,065 | INFO     | arbitrage-assistant | lifespan:154 | BridgeFeeMonitorService initialized
+2026-04-14 07:49:01,066 | INFO     | arbitrage-assistant | lifespan:168 | OpportunityDetectorService initialized
+2026-04-14 07:49:01,066 | INFO     | arbitrage-assistant | lifespan:174 | Application startup complete
+2026-04-14 07:49:01,075 | INFO     | arbitrage-assistant | lifespan:181 | StrategyManager initialized
+2026-04-14 07:49:01,084 | INFO     | arbitrage-assistant | lifespan:186 | FundManager initialized
+2026-04-14 07:49:01,095 | WARNING  | arbitrage-assistant | lifespan:209 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 08:55:24,305 | INFO     | arbitrage-assistant | lifespan:215 | Shutting down...
+2026-04-14 09:08:16,637 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+t available: No module named 'web3'
+2026-04-14 08:55:27,398 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 08:55:27,398 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 08:55:27,399 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 08:55:27,399 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 08:55:27,399 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 08:55:27,400 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 08:55:27,411 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 08:55:27,423 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 08:55:27,434 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 09:08:19,698 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 09:08:19,736 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 09:08:19,736 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 09:08:19,736 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 09:08:19,737 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 09:08:19,737 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 09:08:19,737 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 09:08:19,749 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 09:08:19,759 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 09:08:19,768 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 10:20:17,048 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 10:20:17,077 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 10:20:17,077 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 10:20:17,078 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 10:20:17,078 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 10:20:17,079 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 10:20:17,079 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 10:20:17,091 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 10:20:17,101 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 10:20:17,112 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 10:20:48,684 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:44:49,515 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:44:50,178 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:44:50,211 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:44:50,211 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:44:50,211 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:44:50,212 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:44:50,212 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:44:50,212 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:44:50,224 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:44:50,239 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:44:50,248 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:44:50,251 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:45:08,266 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:08,455 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:08,490 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:45:08,490 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:45:08,490 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:45:08,490 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:45:08,491 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:45:08,491 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:45:08,540 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:45:08,591 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:45:08,635 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:45:08,637 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:45:11,105 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:11,288 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:11,317 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:45:11,318 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:45:11,318 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:45:11,318 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:45:11,318 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:45:11,318 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:45:11,334 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:45:11,348 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:45:11,359 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:45:11,361 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:45:36,233 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:36,431 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:36,459 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:45:36,459 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:45:36,460 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:45:36,460 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:45:36,460 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:45:36,460 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:45:36,474 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:45:36,486 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:45:36,496 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:45:36,498 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:45:38,987 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:39,188 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:45:39,220 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:45:39,220 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:45:39,220 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:45:39,220 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:45:39,221 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:45:39,221 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:45:39,237 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:45:39,256 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:45:39,271 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:45:39,273 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:46:03,466 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:46:03,505 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:46:03,505 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:46:03,505 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:46:03,505 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:46:03,505 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:46:03,506 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:46:03,530 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:46:03,555 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:46:03,568 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 11:48:32,224 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 11:48:35,411 | WARNING  | arbitrage-assistant | <module>:266 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 11:48:35,454 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v1.0.0
+2026-04-14 11:48:35,454 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 11:48:35,454 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 11:48:35,455 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 11:48:35,455 | INFO     | arbitrage-assistant | lifespan:169 | OpportunityDetectorService initialized
+2026-04-14 11:48:35,455 | INFO     | arbitrage-assistant | lifespan:175 | Application startup complete
+2026-04-14 11:48:35,466 | INFO     | arbitrage-assistant | lifespan:182 | StrategyManager initialized
+2026-04-14 11:48:35,477 | INFO     | arbitrage-assistant | lifespan:187 | FundManager initialized
+2026-04-14 11:48:35,487 | WARNING  | arbitrage-assistant | lifespan:210 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 17:51:38,778 | INFO     | arbitrage-assistant | lifespan:216 | Shutting down...
+2026-04-14 17:51:42,357 | WARNING  | arbitrage-assistant | <module>:277 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 17:51:42,402 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v0.2.0
+2026-04-14 17:51:42,402 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 17:51:42,402 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 17:51:42,402 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 17:51:42,403 | INFO     | arbitrage-assistant | lifespan:180 | OpportunityDetectorService initialized
+2026-04-14 17:51:42,403 | INFO     | arbitrage-assistant | lifespan:186 | Application startup complete
+2026-04-14 17:51:42,414 | INFO     | arbitrage-assistant | lifespan:193 | StrategyManager initialized
+2026-04-14 17:51:42,423 | INFO     | arbitrage-assistant | lifespan:198 | FundManager initialized
+2026-04-14 17:51:42,434 | WARNING  | arbitrage-assistant | lifespan:221 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 17:56:14,388 | INFO     | arbitrage-assistant | lifespan:227 | Shutting down...
+2026-04-14 17:56:17,667 | WARNING  | arbitrage-assistant | <module>:277 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 17:56:17,726 | INFO     | arbitrage-assistant | lifespan:133 | Starting 链上套利助手 v0.2.0
+2026-04-14 17:56:17,726 | INFO     | arbitrage-assistant | lifespan:147 | PriceMonitorService initialized
+2026-04-14 17:56:17,726 | INFO     | arbitrage-assistant | lifespan:151 | AlertService initialized
+2026-04-14 17:56:17,727 | INFO     | arbitrage-assistant | lifespan:155 | BridgeFeeMonitorService initialized
+2026-04-14 17:56:17,727 | INFO     | arbitrage-assistant | lifespan:180 | OpportunityDetectorService initialized
+2026-04-14 17:56:17,727 | INFO     | arbitrage-assistant | lifespan:186 | Application startup complete
+2026-04-14 17:56:17,738 | INFO     | arbitrage-assistant | lifespan:193 | StrategyManager initialized
+2026-04-14 17:56:17,749 | INFO     | arbitrage-assistant | lifespan:198 | FundManager initialized
+2026-04-14 17:56:17,759 | WARNING  | arbitrage-assistant | lifespan:221 | Phase 3 components initialization warning: name 'ABC' is not defined
+2026-04-14 18:04:04,150 | INFO     | arbitrage-assistant | lifespan:227 | Shutting down...
+2026-04-14 18:04:07,797 | WARNING  | arbitrage-assistant | <module>:267 | Phase 3 routes not available: No module named 'web3'
+2026-04-14 18:04:07,835 | INFO     | arbitrage-assistant | lifespan:134 | Starting 链上套利助手 v0.2.0
+2026-04-14 18:04:07,835 | INFO     | arbitrage-assistant | lifespan:148 | PriceMonitorService initialized
+2026-04-14 18:04:07,835 | INFO     | arbitrage-assistant | lifespan:152 | AlertService initialized
+2026-04-14 18:04:07,835 | INFO     | arbitrage-assistant | lifespan:156 | BridgeFeeMonitorService initialized
+2026-04-14 18:04:07,836 | INFO     | arbitrage-assistant | lifespan:170 | OpportunityDetectorService initialized
+2026-04-14 18:04:07,836 | INFO     | arbitrage-assistant | lifespan:176 | Application startup complete
+2026-04-14 18:04:07,848 | INFO     | arbitrage-assistant | lifespan:183 | StrategyManager initialized
+2026-04-14 18:04:07,860 | INFO     | arbitrage-assistant | lifespan:188 | FundManager initialized
+2026-04-14 18:04:07,870 | WARNING  | arbitrage-assistant | lifespan:211 | Phase 3 components initialization warning: name 'ABC' is not defined
