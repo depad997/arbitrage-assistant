@@ -266,6 +266,12 @@ class AlertConfig:
         # 飞书配置也从全局配置加载
         if not self.feishu_webhook_url:
             self.feishu_webhook_url = settings.FEISHU_WEBHOOK_URL
+        
+        # 自动启用已配置的渠道
+        if self.feishu_webhook_url and AlertChannel.FEISHU not in self.enabled_channels:
+            self.enabled_channels.append(AlertChannel.FEISHU)
+        if self.telegram_bot_token and self.telegram_chat_id and AlertChannel.TELEGRAM not in self.enabled_channels:
+            self.enabled_channels.append(AlertChannel.TELEGRAM)
 
 
 @dataclass
