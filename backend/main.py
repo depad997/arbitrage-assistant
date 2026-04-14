@@ -426,6 +426,8 @@ async def web_dashboard():
                 <tr>
                     <th>代币</th>
                     <th>路径</th>
+                    <th>源链价格</th>
+                    <th>目标链价格</th>
                     <th>价差</th>
                     <th>收益率</th>
                     <th>净利润</th>
@@ -434,7 +436,7 @@ async def web_dashboard():
                 </tr>
             </thead>
             <tbody id="oppTable">
-                <tr><td colspan="7">加载中...</td></tr>
+                <tr><td colspan="9">加载中...</td></tr>
             </tbody>
         </table>
     </div>
@@ -588,6 +590,47 @@ async def web_dashboard():
         });
         
         content.innerHTML = html;
+        
+        // 更新套利机会表格中的价格
+        updateOpportunityPrices();
+    }
+    
+    // 更新套利机会表格中的实时价格
+    function updateOpportunityPrices() {
+        const allPrices = window.allPrices || {};
+        const rows = document.querySelectorAll('#oppTable tr');
+        
+        rows.forEach(row => {
+            const symbolCell = row.querySelector('td:first-child b');
+            if (!symbolCell) return;
+            
+            const symbol = symbolCell.textContent;
+            const pathCell = row.querySelector('td:nth-child(2)');
+            if (!pathCell) return;
+            
+            const pathText = pathCell.textContent;
+            const match = pathText.match(/(\w+)\s*→\s*(\w+)/);
+            if (!match) return;
+            
+            const sourceChain = match[1].toLowerCase();
+            const targetChain = match[2].toLowerCase();
+            
+            const tokenPrices = allPrices[symbol] || {};
+            const srcPrice = tokenPrices[sourceChain];
+            const dstPrice = tokenPrices[targetChain];
+            
+            const srcCell = row.querySelector('td:nth-child(3)');
+            const dstCell = row.querySelector('td:nth-child(4)');
+            
+            if (srcCell && srcPrice) {
+                srcCell.innerHTML = formatPrice(srcPrice);
+                srcCell.style.color = '#10b981';
+            }
+            if (dstCell && dstPrice) {
+                dstCell.innerHTML = formatPrice(dstPrice);
+                dstCell.style.color = '#f59e0b';
+            }
+        });
     }
 
     function renderPrices() {
@@ -630,19 +673,31 @@ async def web_dashboard():
             
             const tbody = document.getElementById('oppTable');
             if (opportunities.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7">暂无机会，点击"扫描机会"</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9">暂无机会，点击"扫描机会"</td></tr>';
             } else {
-                tbody.innerHTML = opportunities.slice(0, 15).map(o => `
+                tbody.innerHTML = opportunities.slice(0, 15).map(o => {
+                    // 获取实时价格
+                    const allPrices = window.allPrices || {};
+                    const tokenPrices = allPrices[o.symbol] || {};
+                    const srcPrice = tokenPrices[o.source_chain];
+                    const dstPrice = tokenPrices[o.target_chain];
+                    const srcPriceStr = srcPrice ? formatPrice(srcPrice) : '<span style="color:#6b7280">-</span>';
+                    const dstPriceStr = dstPrice ? formatPrice(dstPrice) : '<span style="color:#6b7280">-</span>';
+                    const priceDiff = (srcPrice && dstPrice) ? ((dstPrice - srcPrice) / srcPrice * 100).toFixed(2) : '-';
+                    
+                    return `
                     <tr>
                         <td><b>${o.symbol}</b></td>
                         <td><span class="blue">${o.source_chain}</span> → <span class="purple">${o.target_chain}</span></td>
+                        <td style="color:#10b981">${srcPriceStr}</td>
+                        <td style="color:#f59e0b">${dstPriceStr}</td>
                         <td>${(o.price_diff_pct || 0).toFixed(2)}%</td>
                         <td class="green"><b>${(o.net_profit_pct || o.price_diff_pct || 0).toFixed(2)}%</b></td>
                         <td>$${(o.net_profit_usd || 0).toFixed(2)}</td>
                         <td><span style="color:${o.risk_level === 'very_low' ? '#34d399' : '#fbbf24'}">${o.risk_level === 'very_low' ? '极低' : '低'}</span></td>
                         <td><button class="btn btn-green btn-sm" onclick="execute('${o.id}')">执行</button></td>
-                    </tr>
-                `).join('');
+                    </tr>`;
+                }).join('');
             }
 
             // 自动加载价格
