@@ -467,23 +467,37 @@ async def web_dashboard():
 
     async function fetchPrices() {
         const content = document.getElementById('priceContent');
-        content.innerHTML = '<p style="color:#9ca3af">正在从多条链获取实时价格...</p>';
+        content.innerHTML = '<p style="color:#9ca3af">正在从多数据源获取实时价格...</p>';
         
         try {
-            // 从多条链获取价格
+            // 从多条链获取价格（使用多数据源 API）
             const chains = ['ethereum', 'arbitrum', 'optimism', 'base', 'bsc', 'polygon', 'avalanche'];
             const allPrices = {};
+            const sourceInfo = {}; // 存储数据源信息
             
             // 并行请求所有链的价格
             const requests = chains.map(async chain => {
                 try {
-                    const resp = await fetch(API + '/api/prices/onchain/' + chain);
-                    const data = await resp.json();
+                    // 优先使用多数据源 API
+                    let resp = await fetch(API + '/api/prices/multi/' + chain);
+                    let data = await resp.json();
+                    
+                    // 如果多数据源失败，降级到链上 API
+                    if (!data.success) {
+                        resp = await fetch(API + '/api/prices/onchain/' + chain);
+                        data = await resp.json();
+                    }
+                    
                     if (data.success && data.data.prices) {
-                        return { chain, prices: data.data.prices };
+                        return { 
+                            chain, 
+                            prices: data.data.prices,
+                            source_info: data.data.source_info || {},
+                            source: data.data.aggregator || 'onchain_dex'
+                        };
                     }
                 } catch (e) {
-                    console.log('Failed to fetch ' + chain);
+                    console.log('Failed to fetch ' + chain + ': ' + e.message);
                 }
                 return null;
             });
@@ -496,12 +510,19 @@ async def web_dashboard():
                     Object.entries(result.prices).forEach(([symbol, price]) => {
                         if (!allPrices[symbol]) allPrices[symbol] = {};
                         allPrices[symbol][result.chain] = price;
+                        
+                        // 存储数据源信息
+                        if (result.source_info[symbol]) {
+                            if (!sourceInfo[symbol]) sourceInfo[symbol] = {};
+                            sourceInfo[symbol][result.chain] = result.source_info[symbol];
+                        }
                     });
                 }
             });
             
             window.allPrices = allPrices;
-            window.priceSource = 'onchain_dex';
+            window.sourceInfo = sourceInfo;
+            window.priceSource = 'multi_source';
             renderAllPrices();
         } catch (e) {
             content.innerHTML = '<p style="color:#ef4444">获取价格失败: ' + e.message + '</p>';
@@ -531,7 +552,13 @@ async def web_dashboard():
             'RWA': ['ONDO'],
         };
         
-        let html = '<p style="color:#10b981;font-size:12px;margin-bottom:15px">✅ 链上真实价格 - 点击代币查看各链价格对比</p>';
+        let html = '<p style="color:#10b981;font-size:12px;margin-bottom:15px">✅ 多数据源聚合价格 (DexScreener + 1inch + 链上DEX) - 点击代币查看各链价格对比</p>';
+        
+        // 数据源图例
+        html += '<div style="display:flex;gap:15px;margin-bottom:15px;font-size:11px;color:#9ca3af">';
+        html += '<span>📊 数据源: <span style="color:#3b82f6">DexScreener</span> + <span style="color:#8b5cf6">1inch</span> + <span style="color:#10b981">链上DEX</span></span>';
+        html += '<span>🎯 置信度: 绿色=高, 黄色=中, 红色=低</span>';
+        html += '</div>';
         
         Object.entries(categories).forEach(([cat, catSymbols]) => {
             const inCat = symbols.filter(s => catSymbols.includes(s));
@@ -566,12 +593,37 @@ async def web_dashboard():
                 html += `<div style="display:grid;grid-template-columns:80px repeat(7,1fr);padding:10px;border-top:1px solid #374151;font-size:13px;${hasArb ? 'background:rgba(16,185,129,0.1)' : ''}">`;
                 html += `<div style="font-weight:bold;color:${hasArb ? '#10b981' : '#f3f4f6'}">${symbol}${hasArb ? ' 💰' : ''}</div>`;
                 
-                chainPrices.forEach(p => {
+                chainPrices.forEach((p, idx) => {
+                    const chainNames = ['ethereum', 'arbitrum', 'optimism', 'base', 'bsc', 'polygon', 'avalanche'];
+                    const chainName = chainNames[idx];
+                    const info = window.sourceInfo?.[symbol]?.[chainName];
+                    
                     if (p && p > 0) {
                         const isMax = p === maxPrice && priceDiff > 1;
                         const isMin = p === minPrice && priceDiff > 1;
                         const color = isMax ? '#ef4444' : isMin ? '#10b981' : '#f3f4f6';
-                        html += `<div style="text-align:right;color:${color}">${formatPrice(p)}</div>`;
+                        
+                        // 置信度颜色
+                        let confidenceColor = '#6b7280';
+                        let confidenceIcon = '';
+                        if (info?.confidence) {
+                            if (info.confidence >= 0.8) {
+                                confidenceColor = '#10b981';
+                                confidenceIcon = '🟢';
+                            } else if (info.confidence >= 0.5) {
+                                confidenceColor = '#f59e0b';
+                                confidenceIcon = '🟡';
+                            } else {
+                                confidenceColor = '#ef4444';
+                                confidenceIcon = '🔴';
+                            }
+                        }
+                        
+                        // 数据源数量
+                        const sourceCount = info?.sources?.length || 1;
+                        const sourceText = sourceCount > 1 ? `${sourceCount}源` : '';
+                        
+                        html += `<div style="text-align:right;color:${color}" title="置信度: ${(info?.confidence * 100 || 60).toFixed(0)}% | 数据源: ${info?.sources?.join(', ') || '链上'}">${formatPrice(p)} ${confidenceIcon}</div>`;
                     } else {
                         html += '<div style="text-align:right;color:#6b7280">-</div>';
                     }
@@ -1446,6 +1498,101 @@ async def get_onchain_prices(chain: str):
     
     except Exception as e:
         logger.error(f"Get onchain prices error: {e}")
+        return {"success": False, "error": str(e)}
+
+
+class MultiSourcePriceResponse(BaseModel):
+    """多数据源价格响应"""
+    success: bool
+    data: Optional[Dict] = None
+    error: Optional[str] = None
+
+
+@app.get("/api/prices/multi/{chain}", tags=["Price Monitor"])
+async def get_multi_source_prices(chain: str):
+    """
+    从多个数据源获取聚合价格
+    
+    数据源：
+    1. DexScreener - 覆盖 80+ 链，免费无 Key
+    2. 1inch - DEX 聚合报价
+    3. 链上 DEX - 直接读取池子价格
+    """
+    try:
+        if chain not in ENABLED_CHAINS:
+            return {"success": False, "error": f"Unsupported chain: {chain}"}
+        
+        from services.price_sources import get_multi_source_price_service
+        multi_svc = await get_multi_source_price_service()
+        
+        prices = await multi_svc.get_all_prices(chain)
+        
+        # 转换为简单格式
+        simple_prices = {}
+        source_info = {}
+        
+        for symbol, agg_price in prices.items():
+            simple_prices[symbol] = agg_price.price
+            source_info[symbol] = {
+                "sources": [s.value for s in agg_price.sources],
+                "confidence": agg_price.confidence,
+                "source_prices": {s.value: p for s, p in agg_price.source_prices.items()}
+            }
+        
+        return {
+            "success": True,
+            "data": {
+                "chain": chain,
+                "prices": simple_prices,
+                "source_info": source_info,
+                "aggregator": "multi_source_median",
+                "timestamp": datetime.now().isoformat()
+            }
+        }
+    
+    except Exception as e:
+        logger.error(f"Get multi-source prices error: {e}")
+        return {"success": False, "error": str(e)}
+
+
+@app.get("/api/prices/compare", tags=["Price Monitor"])
+async def compare_multi_chain_prices(
+    chains: str = "ethereum,arbitrum,optimism,base,bsc,polygon,avalanche"
+):
+    """
+    多链价格对比（多数据源聚合）
+    
+    返回各代币在不同链上的价格，方便套利分析
+    """
+    try:
+        chain_list = [c.strip() for c in chains.split(",")]
+        
+        from services.price_sources import get_multi_source_price_service, TOKEN_ADDRESSES
+        multi_svc = await get_multi_source_price_service()
+        
+        # 获取主流代币
+        main_symbols = ["ETH", "WETH", "USDC", "USDT", "WBTC", "LINK", "UNI", "ARB", "OP"]
+        
+        # 获取多链价格
+        multi_chain_prices = await multi_svc.get_multi_chain_prices(chain_list, main_symbols)
+        
+        return {
+            "success": True,
+            "data": {
+                "prices": {
+                    symbol: {
+                        chain: agg_price.to_dict() 
+                        for chain, agg_price in chain_prices.items()
+                    }
+                    for symbol, chain_prices in multi_chain_prices.items()
+                },
+                "chains": chain_list,
+                "timestamp": datetime.now().isoformat()
+            }
+        }
+    
+    except Exception as e:
+        logger.error(f"Compare prices error: {e}")
         return {"success": False, "error": str(e)}
 
 

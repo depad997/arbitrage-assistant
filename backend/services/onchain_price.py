@@ -294,6 +294,64 @@ class OnchainPriceService:
             prices.update(estimated_prices)
         
         return prices
+    
+    async def get_token_price(self, chain: str, token_address: str) -> Optional[float]:
+        """
+        获取指定代币的链上价格
+        
+        Args:
+            chain: 链名称
+            token_address: 代币地址
+            
+        Returns:
+            代币价格（USD）
+        """
+        # 如果是稳定币，直接返回 1
+        stablecoin_addrs = []
+        for stable_symbol in STABLECOINS:
+            addr = TOKEN_ADDRESSES.get(chain, {}).get(stable_symbol, "").lower()
+            if addr:
+                stablecoin_addrs.append(addr.replace("0x", ""))
+        
+        if token_address.lower().replace("0x", "") in stablecoin_addrs:
+            return 1.0
+        
+        # 检查缓存
+        cache_key = f"{chain}:{token_address.lower()}"
+        if cache_key in self.price_cache:
+            return self.price_cache[cache_key]
+        
+        chain_config = get_chain_config(chain)
+        if not chain_config:
+            return None
+        
+        rpc_url = chain_config.rpc_url
+        fallback_urls = chain_config.rpc_fallback
+        
+        # 获取 ETH 价格作为基准
+        eth_price = await self.get_eth_price(chain)
+        if not eth_price:
+            return None
+        
+        # 尝试找到该代币与 ETH 或 USDC 的池子
+        pools = DEX_POOLS.get(chain, {})
+        
+        # 尝试通过 WETH 池子获取价格
+        weth_addr = TOKEN_ADDRESSES.get(chain, {}).get("WETH", "").lower().replace("0x", "")
+        usdc_addr = TOKEN_ADDRESSES.get(chain, {}).get("USDC", "").lower().replace("0x", "")
+        
+        # 检查是否是已知代币
+        known_tokens = TOKEN_ADDRESSES.get(chain, {})
+        for symbol, addr in known_tokens.items():
+            if addr.lower() == token_address.lower():
+                # 已知代币，从 get_all_prices 获取
+                all_prices = await self.get_all_prices(chain)
+                return all_prices.get(symbol)
+        
+        # 未知代币，尝试从 USDC/ETH 池子推断
+        # 这里简化处理，返回 None
+        # 实际生产中需要更复杂的 DEX 聚合查询
+        return None
 
 
 _onchain_price_service: Optional[OnchainPriceService] = None
